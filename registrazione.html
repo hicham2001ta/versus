@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html lang="it">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<link rel="stylesheet" href="path/to/your/cssfile.css"> <!-- Se stai usando un file CSS esterno -->
+    <style>
+        .alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    padding: .375rem .75rem; /* Assicurati che corrisponda al padding degli input */
+    margin-bottom: 1rem; /* Ogni margine dovrebbe corrispondere */
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    width: 100%; /* Assicurati che sia al 100% se gli input sono al 100% */
+    box-sizing: border-box; /* Include padding e border nella larghezza */
+}
+html, body {
+            height: 100%; 
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; 
+        }
+        #page {
+            display: flex;
+            flex-direction: column;
+            height: 100vh; 
+        }
+        .login-button, .Register-button {
+            margin-top: 20px; 
+            margin-bottom: 20px; 
+        }
+        .form-wrap {
+            margin-top: -30px; 
+        }
+        .form-input-small {
+            max-width: 300px; 
+            margin: auto; 
+        }
+        .gtco-nav {
+            background: none; 
+        }
+        #gtco-logo a, .menu-1 a {
+            color: #ffffff; 
+        }
+        header {
+            position: relative; 
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); 
+        }
+        .error-message {
+            color: red; 
+            text-align: center; 
+            margin-top: 20px; 
+        }
+
+    </style>
+<body>
+    <div class="gtco-loader"></div>
+    <div id="page">
+        <nav class="gtco-nav" role="navigation">
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <div id="gtco-logo"><a href="index.html">Versus <em>.</em></a></div>
+                    </div>
+                    <div class="col-xs-8 text-right menu-1">
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="menu.html">Menu</a></li>
+                            <li><a href="services.html">Servizzi</a></li>
+                            <li><a href="login.html">Login</a></li>
+                        </ul>   
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/img_bg_1.jpg);">
+            <div class="overlay"></div>
+            <div class="gtco-container">
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-0 text-center">
+                        <div class="row row-mt-15em">
+                            <div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
+                                <span class="intro-text-small">Benvenuto a Versus</span>
+                                <h1>Engage & Experience</h1>
+                            </div>
+                            <div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
+                                <div class="form-wrap">
+                                    <div class="tab">
+                                        <div class="tab-content">
+                                            <div class="tab-content-inner active" data-content="signup">
+                                                <h3>Register</h3>
+                                                <div id="messageContainer" style="display: none;" class="alert"></div> <!-- Message Container -->
+                                                <form>
+                                                    <div class="mb-3 form-input-small">
+                                                        <label for="username" class="form-label">Username</label>
+                                                        <input type="text" class="form-control" id="username" name="username" required>
+                                                    </div>
+                                                    <div class="mb-3 form-input-small">
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input type="email" class="form-control" id="email" name="email" required>
+                                                    </div>
+                                                    <div class="mb-3 form-input-small">
+                                                        <label for="password" class="form-label">Password</label>
+                                                        <input type="password" class="form-control" id="password" name="password" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary Register-button">Register</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        $('form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'register.php',
+                type: 'post',
+                data: $(this).serialize(),
+                success: function(data) {
+                    $('#messageContainer').show().removeClass('alert-danger').addClass('alert-success').html(data);
+                },
+                error: function(xhr) {
+                    var errorMessage = xhr.status + ': ' + xhr.statusText;
+                    $('#messageContainer').show().removeClass('alert-success').addClass('alert-danger').html('Registration failed - ' + errorMessage);
+                }
+            });
+        });
+    });
+    </script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.countTo.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/magnific-popup-options.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
